@@ -1,3 +1,5 @@
+// allows the file to access the fs module's functions through the fs assignment
+const fs = require('fs');
 // argv property of process is array that holds exactly what was typed in command line to capture data and use in app
 const profileDataArgs = process.argv.slice(2, process.argv.length);
 const [name, github] = profileDataArgs;
@@ -21,8 +23,12 @@ const generatePage = (name, github) => {
     </html>
     `;
 };
-console.log(name, github);
-console.log(generatePage(name, github));
+// file name, data written in this case HTML string template, handle error and success message
+fs.writeFile('index.html', generatePage(name, github), err => {
+    if (err) throw err;
+
+    console.log('Portfolio complete! Check out index.html to see the output.')
+})
 
 // arrow does not require function keyword
 // implicit return means we don't have to use the return statement if we're performing one action
@@ -37,7 +43,8 @@ console.log(generatePage(name, github));
 
     // Is the same as this...
     // array method, we can't use if there is no array involved in the iterable functionality
-    // arrow function 
+    // when arrow function has one argument, parentheses are optional
+    // when there are no arguments or more than one, parentheses are necessary
     profileDataArr.forEach(profileItem => 
         console.log(profileItem));
 };
