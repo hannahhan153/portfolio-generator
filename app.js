@@ -29,9 +29,23 @@ return inquirer.prompt([
         }
     },
     {
+        type: 'confirm',
+        name: 'confirmAbout',
+        message: 'Would you like to enter some information about yourself for an "About" section?',
+        default: true
+    },
+    {
         type: 'input',
         name: 'about',
-        message: 'Provide some information about yourself.'
+        message: 'Provide some information about yourself:',
+        // like the validate method, passes an object of all of the answers given so far as an object
+        when: ({ confirmAbout }) => {
+            if (confirmAbout) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 ]);
 };
@@ -83,7 +97,7 @@ if (!portfolioData.projects) {
     {
         type: 'input',
         name: 'link',
-        message: 'Enter the github link to your project. (Required)'
+        message: 'Enter the github link to your project. (Required)',
         validate: linkInput => {
             if (linkInput) {
                 return true;
