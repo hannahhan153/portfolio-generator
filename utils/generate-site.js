@@ -1,4 +1,4 @@
-const fs = require('fs');
+const { writeFile, copyFile } = require('./utils/generate-site.js');
 const writeFile = fileContent => {
     // new is a promise object that acts like a container that allows us to run code which at some point will be in a status of pending which means the code has begun to run but waiting for a response
     // resolve function when code executes successfully and reject function when code fails to execute
@@ -34,3 +34,6 @@ const copyFile = fileContent => {
         });
     });
 };
+
+// shorthand property names for both property name and its value
+module.exports = { writeFile, copyFile };
